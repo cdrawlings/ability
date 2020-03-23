@@ -1,0 +1,140 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- Add your site or application content here -->
+  <p>Hello world! This is HTML5 Boilerplate.</p>
+
+
+  <select id="locality-dropdown" name="locality">
+  </select>
+
+<section>
+    Strength : <input id="strength" value="9"><input id="finalStr" ><br>
+  Constitution : <input id="constitution" value="9"><input id="finalCon" ><br>
+  Dexterity : <input id="dexterity" value="9"><input id="finalDex" ><br>
+  Intelligence : <input id="intelligence" value="9"><input id="finalInt" ><br>
+  Wisdom : <input id="wisdom" value="9"><input id="finalWis" ><br>
+  Charisma : <input id="charisma" value="9"><input id="finalCha" ><br>
+
+  <button onclick="add()">Click me</button>
+  </section>
+
+
+
+  <script>
+ // json api
+ // https://api.myjson.com/bins/g8jco
+
+
+
+ let dropdown = document.getElementById('locality-dropdown');
+ dropdown.length = 0;
+
+ let defaultOption = document.createElement('option');
+ defaultOption.text = 'Choose character race';
+
+ dropdown.add(defaultOption);
+ dropdown.selectedIndex = 0;
+
+ const url = 'https://api.myjson.com/bins/g8jco';
+
+ const request = new XMLHttpRequest();
+ request.open('GET', url, true);
+
+ request.onload = function() {
+     if (request.status === 200) {
+         const data = JSON.parse(request.responseText);
+         let option;
+         for (let i = 0; i < data.length; i++) {
+             option = document.createElement('option');
+             option.text = data[i].race;
+             option.strength = data[i].strength;
+             dropdown.add(option);
+         }
+     } else {
+         // Reached the server, but it returned an error
+     }
+ };
+
+ request.onerror = function() {
+     console.error('An error occurred fetching the JSON from ' + url);
+ };
+
+ request.send();
+
+
+let strMod = chrace.str;
+let conMod = chrace.con;
+let dexMod = chrace.dex;
+let intMod = chrace.int;
+let wisMod = chrace.wis;
+let chaMod = chrace.cha;
+console.log(strMod, conMod, dexMod, intMod, wisMod, chaMod);
+let inpStr=Number(document.getElementById("strength").value);
+let inpCon=Number(document.getElementById("constitution").value);
+let inpDex=Number(document.getElementById("dexterity").value);
+let inpInt=Number(document.getElementById("intelligence").value);
+let inpWis=Number(document.getElementById("wisdom").value);
+let inpCha=Number(document.getElementById("charisma").value);
+
+
+
+function add() {
+    s = strMod + inpStr;
+    document.getElementById("finalStr").value= s;
+    c = conMod + inpCon;
+    document.getElementById("finalCon").value= c;
+    d = dexMod + inpDex;
+    document.getElementById("finalDex").value= d;
+    i = intMod + inpInt;
+    document.getElementById("finalInt").value= i;
+    w = conMod + inpWis;
+    document.getElementById("finalWis").value= w;
+    ch = conMod + inpCha;
+    document.getElementById("finalCha").value= ch;
+}
+
+
+
+
+  </script>
+
+
+
+  <script src="js/vendor/modernizr-3.8.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/race.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>
